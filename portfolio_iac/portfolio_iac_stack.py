@@ -54,7 +54,7 @@ class PortfolioIacStack(Stack):
         bucket.add_to_resource_policy(
             iam.PolicyStatement(
                 actions=["s3:GetObject"],
-                resources=[bucket.arn_for_objects("portfolio_sergi/*")],
+                resources=[bucket.arn_for_objects("portfolio_statics/*")],
                 principals=[iam.CanonicalUserPrincipal(oai.cloud_front_origin_access_identity_s3_canonical_user_id)]
             )
         )
@@ -62,7 +62,7 @@ class PortfolioIacStack(Stack):
         # Deploy files to S3
         s3_deployment.BucketDeployment(
             self, "DeployPortfolio",
-            sources=[s3_deployment.Source.asset("portfolio_sergi")],
+            sources=[s3_deployment.Source.asset("portfolio_statics")],
             destination_bucket=bucket,
             destination_key_prefix=""
         )
