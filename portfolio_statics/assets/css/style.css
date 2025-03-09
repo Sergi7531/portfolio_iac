@@ -482,7 +482,6 @@ section .container {
   display: flex;
   align-items: center;
   padding: 20px;
-  background: #09203a;
   transition: ease-in-out 0.3s;
 }
 
@@ -785,7 +784,6 @@ section .container {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.6);
 }
 
 .portfolio .portfolio-wrap::before {
