@@ -14,7 +14,10 @@ The portfolio hosts a static website on Amazon S3, distributed securely via Amaz
 The project also incorporates a custom domain (managed in AWS Route 53), which was originally registered through an external provider.
 The implementation ensures secure and efficient content delivery by leveraging AWS (free!) services, while maintaining flexibility for future updates and scalability.
 
-Note: This project is absolutely free to deploy, as it leverages the AWS Free Tier services. Still, it is recommended to monitor the usage to avoid any unexpected charges. It is highly recommended to setup a budget alarm in the AWS Billing Dashboard to avoid any unexpected charges.
+```
+Note: This project is absolutely free to deploy, as it leverages the AWS Free Tier services. 
+Still, it is recommended to monitor the usage to avoid any unexpected charges. It is highly recommended to setup a budget alarm in the AWS Billing Dashboard to avoid any unexpected charges.
+```
 ---
 
 ## **Motivation**
