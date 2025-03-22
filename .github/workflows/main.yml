@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write  # Enable OIDC
+      id-token: write  # Required for OIDC
       contents: read
 
     steps:
@@ -22,7 +22,7 @@ jobs:
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/GitHubActionsDeploymentRole
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsPortfolioDeploymentRole
           aws-region: us-east-1  # Change to your AWS region
 
       - name: Set up Node.js
@@ -34,7 +34,7 @@ jobs:
         run: npm install -g aws-cdk
 
       - name: Install Project Dependencies
-        run: npm install  # If using Python CDK, use `pip install -r requirements.txt`
+        run: pip install -r requirements.txt
 
       - name: CDK Bootstrap
         run: cdk bootstrap
