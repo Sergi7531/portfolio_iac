@@ -2,5 +2,13 @@ on:
   push:
     branches:
     - main
+  workflow_dispatch:
+
+jobs:
   deploy_portfolio:
-      run: cdk deploy
+    name: Deploy IaC portfolio
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: CDK Deploy step
+      - run: cdk deploy
+      
