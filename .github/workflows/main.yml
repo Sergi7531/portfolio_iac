@@ -10,6 +10,8 @@ jobs:
   deploy_portfolio:
     name: Deploy IaC Portfolio
     runs-on: ubuntu-latest
+    env:
+      DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
 
     permissions:
       id-token: write  # Required for OIDC
@@ -40,6 +42,7 @@ jobs:
         run: cdk bootstrap
 
       - name: CDK Synth
+      
         run: cdk synth
 
       - name: CDK Deploy
