@@ -1,14 +1,46 @@
+name: Deploy Portfolio IaC
+
 on:
   push:
     branches:
-    - main
+      - main
   workflow_dispatch:
 
 jobs:
   deploy_portfolio:
-    name: Deploy IaC portfolio
-    runs-on: ${{ matrix.os }}
+    name: Deploy IaC Portfolio
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write  # Enable OIDC
+      contents: read
+
     steps:
-      - name: CDK Deploy step
-      - run: cdk deploy
-      
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/GitHubActionsDeploymentRole
+          aws-region: us-east-1  # Change to your AWS region
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+
+      - name: Install Project Dependencies
+        run: npm install  # If using Python CDK, use `pip install -r requirements.txt`
+
+      - name: CDK Bootstrap
+        run: cdk bootstrap
+
+      - name: CDK Synth
+        run: cdk synth
+
+      - name: CDK Deploy
+        run: cdk deploy --require-approval never
